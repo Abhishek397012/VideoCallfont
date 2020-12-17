@@ -33,7 +33,7 @@ export default function Room() {
             myStream.current.srcObject = stream
         }).catch(err => console.log(err))
 
-        // server tells us a user is connected with his ID and we call that user 
+        // server tells us a user has connected with his ID and we call that user 
         socket.on('user-connected' , id=>{
             const call = myPeer.call(id,myStream.current.srcObject)
             setPeers(peers=>[...peers,call])
