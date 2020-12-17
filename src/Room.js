@@ -13,15 +13,19 @@ export default function Room() {
 
     useEffect( () => {
 
+        // connecting with socket server
         socket = io('http://localhost:8000')
 
+        // connecting with peer server
         const myPeer = new peer()
 
+        // getting unique id from peer server and asking backend to join room 
         myPeer.on('open' , id => {
             console.log('id', id)
             socket.emit('join-room' , id)
         })
         
+        // getting video and audio
         navigator.mediaDevices.getUserMedia({
             video:true,
             audio:true
@@ -29,6 +33,7 @@ export default function Room() {
             myStream.current.srcObject = stream
         }).catch(err => console.log(err))
 
+        // server tells us a user is connected with his ID and we call that user 
         socket.on('user-connected' , id=>{
             const call = myPeer.call(id,myStream.current.srcObject)
             setPeers(peers=>[...peers,call])
@@ -37,6 +42,7 @@ export default function Room() {
             })
         })
 
+        // when a user recieves a call it answers the call with it's own stream
         myPeer.on('call' , call => {
             call.answer(myStream.current.srcObject)
             setPeers(peers=>[...peers,call])
@@ -45,11 +51,9 @@ export default function Room() {
             })
         })
 
-
     } , [])
 
     return (
-      
         <div className="App">
             <video ref={myStream} muted autoPlay width='40%'/>
             {peers.map((call,index) => <Video call={call} key = {index}/>)}
