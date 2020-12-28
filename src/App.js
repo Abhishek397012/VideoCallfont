@@ -1,11 +1,8 @@
-import logo from './logo.svg';
-import './App.css';
-import Room from './Room.js'
+import "./App.css";
+import Room from "./Room.js";
 
 function App() {
-  return (
-    <Room/>
-  );
+  return <Room />;
 }
 
 export default App;

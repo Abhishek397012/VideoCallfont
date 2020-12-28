@@ -2,11 +2,18 @@
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+.video {
+  border: white 1px solid;
+  margin: 10px;
+  height: 200px;
+  width: 200px;
+  overflow: hidden;
 }
 
 .App-logo {

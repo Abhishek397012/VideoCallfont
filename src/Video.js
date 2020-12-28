@@ -1,17 +1,14 @@
-import React,{useEffect,useRef} from 'react'
+import React, { useEffect, useRef } from "react";
+import "./App.css";
 
-export default function Video({call}) {
-    
-    const ref = useRef()
+export default function Video({ call }) {
+  const ref = useRef();
 
-    useEffect(() => {
-        
-        call.on('stream' , stream => {
-            ref.current.srcObject = stream
-        })
-        
-    }, [])
+  useEffect(() => {
+    call.on("stream", stream => {
+      ref.current.srcObject = stream;
+    });
+  }, []);
 
-
-    return <video ref = {ref} autoPlay width='70%'/>
+  return <video ref={ref} autoPlay className="video" muted />;
 }
